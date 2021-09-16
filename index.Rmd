@@ -1,5 +1,5 @@
 ---
-title: "R for Data Science Solutions"
+title: "ORLA 6199 Journal"
 output: html_document
 ---
 
@@ -17,11 +17,14 @@ output: html_document
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-6">
 
-# **My Lab Journal**
+# **ORLA 6199 Fall 2021**
+*Rachel Lee*
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+This site contains my exercise solutions for the book R for Data Science, by Hadley Wickham and Garret Grolemund (Wickham and Grolemund 2017).
 
-## How to use
+## Some notes
+
+1. The site contains the exercise solutions for the book [R for Data Science](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_1?dchild=1&keywords=r+for+data+science&qid=1631763357&sr=8-1) by Hadley Wickham and Garret Grolemund.
 
 1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
 
@@ -29,13 +32,12 @@ This is a template example for lab journaling. Students in Matt Crump's Human Co
 
 3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
 
-4. Change everything to make it your own.
+
 
 
 </div>
 <div class="col-sm-6">
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
 
 <a href = "https://crumplab.github.io">
 ![](images/logo.png)
