@@ -17,15 +17,15 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 Last compiled: `r Sys.Date()`
 
-# Chapter 1
-### Data Visualization with ggplot2
-
-Last compiled: `r Sys.Date()`
+# Chapter 3
 
 
-1. Run `ggplot(data = mpg)`. What do you see?
+### 3.2.4 Exercises
+
+#### 1. Run `ggplot(data = mpg)`. What do you see?
 ```{r}
 library(tidyverse)
+library(dplyr)
 library(ggplot2)
 
 ggplot(data = mpg)
@@ -34,7 +34,7 @@ ggplot(data = mpg)
 This is an empty plot since no layers were added with geom function.
 
 
-2. How many rows are in `mtcars`? How many columns?
+#### 2. How many rows are in `mtcars`? How many columns?
 ```{r}
 nrow(mtcars)
 ncol(mtcars)
@@ -43,7 +43,7 @@ ncol(mtcars)
 There are `r nrow(mtcars)` rows and `r ncol(mtcars)` columns in `mtcars`.
 
 
-3. What does the `drv` variable describe? Read the help for `?mpg` to
+#### 3. What does the `drv` variable describe? Read the help for `?mpg` to
 find out.
 ```{r}
 # ?mpg
@@ -52,24 +52,88 @@ find out.
 `drv` is the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd.
 
 
-4. Make a scatterplot of `hwy` versus `cyl`.
+#### 4. Make a scatterplot of `hwy` versus `cyl`.
 ```{r}
 ggplot(mpg, aes(x = cyl, y = hwy)) +
   geom_point()
 ```
 
 
-5. What happens if you make a scatterplot of `class` versus `drv`?
+#### 5. What happens if you make a scatterplot of `class` versus `drv`?
 Why is the plot not useful?
 ```{r}
 ggplot(mpg, aes(x = class, y = drv)) +
   geom_point()
 ```
 
-A scatter plot is not a useful here because both `drv` and `class` are categorical variables.
+A scatter plot is not a useful here because both `drv` and `class` are categorical variables. Scatterplots are commonly used to visualize two continuous variables using visual marks mapped to a two-dimensional Cartesian space. Hence, the scatterplot here shows the limitation of managing two categorical variables. This is largely because categorical variables are typically stored as a small number of values. Within the `mpg` dataset, we can see that `class` variables holds 7 types of cars, and `cyl` holds 4 types of cylinders. Therefore, there will only be 21 points mapped on the scatterplot.
+
+```{r}
+mpg %>% distinct(class) # or unique(mpg$class)
+mpg %>% distinct(cyl)   # or unique(mpg$cyl)
+```
 
 
-# Chapter 2
+### 3.3.1 Exercises
+
+#### 1. What’s gone wrong with this code? Why are the points not blue?
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+```
+
+The `color` argument is defined as part of the `mapping`. Therefore, it is being argued as an aesthetic. This can be corrected as below:
+
+```{r}
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+
+Or,
+
+```{r}
+ggplot(data = mpg, aes(x = displ, y = hwy)) +
+  geom_point(colour = "blue")
+```
+
+
+#### 2. Which variables in `mpg` are categorical? Which variables are continuous? (Hint: type `?mpg` to read the documentation for the dataset). How can you see this information when you run `mpg`?
+
+```{r}
+head(mpg, 10) # or glipse(mpg)
+```
+My initial screening is that Variables with `<chr>` are categorical, those with `<dbl>` and `<int>` are continuous. But if you take a closer look at the dataset, `cyl`, `disp` are categorical. `year`, `city`, and `hwy`discrete variables, but we can decide to treat it as continuous variables.
+
+
+#### 3. Map a continuous variable to `color`, `size`, and `shape`. How do these aesthetics behave differently for categorical vs. continuous variables?
+
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, color = drv)) +
+  geom_point() +
+  labs(title = "mpg dataset: hwy vs. cty", 
+       caption = "mpg dataset", 
+       x = "Highway miles per gallon", 
+       y = "city miles per gallon",
+       color = "Type of drive train")
+```
+
+It's intuitive that `cty` and `hwy` will show a positive linear relationship. The `color` mapping is set to `drv`, which is a categorical variable.  
+
+
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, color = year)) +
+  geom_point() +
+  labs(title = "mpg dataset: hwy vs. cty", 
+       caption = "mpg dataset", 
+       x = "Highway miles per gallon", 
+       y = "city miles per gallon",
+       color = "Year")
+```
+
+
+
+
+# Chapter 4
 
 ## Second level header
 

@@ -345,51 +345,127 @@ div.tocify {
 </div>
 
 
-<p>Last compiled: 2021-09-16</p>
-<div id="chapter-1" class="section level1">
-<h1>Chapter 1</h1>
-<div id="data-visualization-with-ggplot2" class="section level3">
-<h3>Data Visualization with ggplot2</h3>
-<p>Last compiled: 2021-09-16</p>
-<ol style="list-style-type: decimal">
-<li>Run <code>ggplot(data = mpg)</code>. What do you see?</li>
-</ol>
+<p>Last compiled: 2021-09-17</p>
+<div id="chapter-3" class="section level1">
+<h1>Chapter 3</h1>
+<div id="exercises" class="section level3">
+<h3>3.2.4 Exercises</h3>
+<div id="run-ggplotdata-mpg.-what-do-you-see" class="section level4">
+<h4>1. Run <code>ggplot(data = mpg)</code>. What do you see?</h4>
 <pre class="r"><code>library(tidyverse)
+library(dplyr)
 library(ggplot2)
 
 ggplot(data = mpg)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>This is an empty plot since no layers were added with geom function.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>How many rows are in <code>mtcars</code>? How many columns?</li>
-</ol>
+</div>
+<div id="how-many-rows-are-in-mtcars-how-many-columns" class="section level4">
+<h4>2. How many rows are in <code>mtcars</code>? How many columns?</h4>
 <pre class="r"><code>nrow(mtcars)</code></pre>
 <pre><code>## [1] 32</code></pre>
 <pre class="r"><code>ncol(mtcars)</code></pre>
 <pre><code>## [1] 11</code></pre>
 <p>There are 32 rows and 11 columns in <code>mtcars</code>.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>What does the <code>drv</code> variable describe? Read the help for <code>?mpg</code> to find out.</li>
-</ol>
+</div>
+<div id="what-does-the-drv-variable-describe-read-the-help-for-mpg-to" class="section level4">
+<h4>3. What does the <code>drv</code> variable describe? Read the help for <code>?mpg</code> to</h4>
+<p>find out.</p>
 <pre class="r"><code># ?mpg</code></pre>
 <p><code>drv</code> is the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd.</p>
-<ol start="4" style="list-style-type: decimal">
-<li>Make a scatterplot of <code>hwy</code> versus <code>cyl</code>.</li>
-</ol>
+</div>
+<div id="make-a-scatterplot-of-hwy-versus-cyl." class="section level4">
+<h4>4. Make a scatterplot of <code>hwy</code> versus <code>cyl</code>.</h4>
 <pre class="r"><code>ggplot(mpg, aes(x = cyl, y = hwy)) +
   geom_point()</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<ol start="5" style="list-style-type: decimal">
-<li>What happens if you make a scatterplot of <code>class</code> versus <code>drv</code>? Why is the plot not useful?</li>
-</ol>
+</div>
+<div id="what-happens-if-you-make-a-scatterplot-of-class-versus-drv" class="section level4">
+<h4>5. What happens if you make a scatterplot of <code>class</code> versus <code>drv</code>?</h4>
+<p>Why is the plot not useful?</p>
 <pre class="r"><code>ggplot(mpg, aes(x = class, y = drv)) +
   geom_point()</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>A scatter plot is not a useful here because both <code>drv</code> and <code>class</code> are categorical variables.</p>
+<p>A scatter plot is not a useful here because both <code>drv</code> and <code>class</code> are categorical variables. Scatterplots are commonly used to visualize two continuous variables using visual marks mapped to a two-dimensional Cartesian space. Hence, the scatterplot here shows the limitation of managing two categorical variables. This is largely because categorical variables are typically stored as a small number of values. Within the <code>mpg</code> dataset, we can see that <code>class</code> variables holds 7 types of cars, and <code>cyl</code> holds 4 types of cylinders. Therefore, there will only be 21 points mapped on the scatterplot.</p>
+<pre class="r"><code>mpg %&gt;% distinct(class) # or unique(mpg$class)</code></pre>
+<pre><code>## # A tibble: 7 x 1
+##   class     
+##   &lt;chr&gt;     
+## 1 compact   
+## 2 midsize   
+## 3 suv       
+## 4 2seater   
+## 5 minivan   
+## 6 pickup    
+## 7 subcompact</code></pre>
+<pre class="r"><code>mpg %&gt;% distinct(cyl)   # or unique(mpg$cyl)</code></pre>
+<pre><code>## # A tibble: 4 x 1
+##     cyl
+##   &lt;int&gt;
+## 1     4
+## 2     6
+## 3     8
+## 4     5</code></pre>
 </div>
 </div>
-<div id="chapter-2" class="section level1">
-<h1>Chapter 2</h1>
+<div id="exercises-1" class="section level3">
+<h3>3.3.1 Exercises</h3>
+<div id="whats-gone-wrong-with-this-code-why-are-the-points-not-blue" class="section level4">
+<h4>1. What’s gone wrong with this code? Why are the points not blue?</h4>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = &quot;blue&quot;))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The <code>color</code> argument is defined as part of the <code>mapping</code>. Therefore, it is being argued as an aesthetic. This can be corrected as below:</p>
+<pre class="r"><code>ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color = &quot;blue&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Or,</p>
+<pre class="r"><code>ggplot(data = mpg, aes(x = displ, y = hwy)) +
+  geom_point(colour = &quot;blue&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="which-variables-in-mpg-are-categorical-which-variables-are-continuous-hint-type-mpg-to-read-the-documentation-for-the-dataset.-how-can-you-see-this-information-when-you-run-mpg" class="section level4">
+<h4>2. Which variables in <code>mpg</code> are categorical? Which variables are continuous? (Hint: type <code>?mpg</code> to read the documentation for the dataset). How can you see this information when you run <code>mpg</code>?</h4>
+<pre class="r"><code>head(mpg, 10) # or glipse(mpg)</code></pre>
+<pre><code>## # A tibble: 10 x 11
+##    manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 audi         a4           1.8  1999     4 auto~ f        18    29 p     comp~
+##  2 audi         a4           1.8  1999     4 manu~ f        21    29 p     comp~
+##  3 audi         a4           2    2008     4 manu~ f        20    31 p     comp~
+##  4 audi         a4           2    2008     4 auto~ f        21    30 p     comp~
+##  5 audi         a4           2.8  1999     6 auto~ f        16    26 p     comp~
+##  6 audi         a4           2.8  1999     6 manu~ f        18    26 p     comp~
+##  7 audi         a4           3.1  2008     6 auto~ f        18    27 p     comp~
+##  8 audi         a4 quattro   1.8  1999     4 manu~ 4        18    26 p     comp~
+##  9 audi         a4 quattro   1.8  1999     4 auto~ 4        16    25 p     comp~
+## 10 audi         a4 quattro   2    2008     4 manu~ 4        20    28 p     comp~</code></pre>
+<p>My initial screening is that Variables with <code>&lt;chr&gt;</code> are categorical, those with <code>&lt;dbl&gt;</code> and <code>&lt;int&gt;</code> are continuous. But if you take a closer look at the dataset, <code>cyl</code>, <code>disp</code> are categorical. <code>year</code>, <code>city</code>, and <code>hwy</code>discrete variables, but we can decide to treat it as continuous variables.</p>
+</div>
+<div id="map-a-continuous-variable-to-color-size-and-shape.-how-do-these-aesthetics-behave-differently-for-categorical-vs.-continuous-variables" class="section level4">
+<h4>3. Map a continuous variable to <code>color</code>, <code>size</code>, and <code>shape</code>. How do these aesthetics behave differently for categorical vs. continuous variables?</h4>
+<pre class="r"><code>ggplot(mpg, aes(x = cty, y = hwy, color = drv)) +
+  geom_point() +
+  labs(title = &quot;mpg dataset: hwy vs. cty&quot;, 
+       caption = &quot;mpg dataset&quot;, 
+       x = &quot;Highway miles per gallon&quot;, 
+       y = &quot;city miles per gallon&quot;,
+       color = &quot;Type of drive train&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>It’s intuitive that <code>cty</code> and <code>hwy</code> will show a positive linear relationship. The <code>color</code> mapping is set to <code>drv</code>, which is a categorical variable.</p>
+<pre class="r"><code>ggplot(mpg, aes(x = cty, y = hwy, color = year)) +
+  geom_point() +
+  labs(title = &quot;mpg dataset: hwy vs. cty&quot;, 
+       caption = &quot;mpg dataset&quot;, 
+       x = &quot;Highway miles per gallon&quot;, 
+       y = &quot;city miles per gallon&quot;,
+       color = &quot;Year&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="chapter-4" class="section level1">
+<h1>Chapter 4</h1>
 <div id="second-level-header" class="section level2">
 <h2>Second level header</h2>
 <p>You can add more headers by adding more hashtags. These won’t be put into the table of contents</p>
@@ -401,7 +477,7 @@ ggplot(data = mpg)</code></pre>
 </div>
 <div id="my-second-post-note-the-order" class="section level1">
 <h1>My second post (note the order)</h1>
-<p>2018 | 7 | 23 Last compiled: 2021-09-16</p>
+<p>2018 | 7 | 23 Last compiled: 2021-09-17</p>
 <p>I’m writing this tutorial going from the top down. And, this is how it will be printed. So, notice the second post is second in the list. If you want your most recent post to be at the top, then make a new post starting at the top. If you want the oldest first, do, then keep adding to the bottom</p>
 </div>
 <div id="adding-r-stuff" class="section level1">
@@ -410,7 +486,7 @@ ggplot(data = mpg)</code></pre>
 <p>So, let’s say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:</p>
 <pre class="r"><code>samples &lt;- rnorm(100, mean=0, sd=1)
 hist(samples)</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="Journal_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.</p>
 </div>
 <div id="the-big-idea" class="section level1">
