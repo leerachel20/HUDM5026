@@ -1,6 +1,6 @@
-name: "MyLabJournal"
+name: "LabJournal"
 navbar:
-  title: "ORLA 6199 Journal"
+  title: "Journal"
   left:
     - text: "Home"
       href: index.html
