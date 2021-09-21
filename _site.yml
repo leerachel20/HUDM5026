@@ -4,8 +4,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Solutions"
+    - text: "WG Solutions"
       href: Journal.html
+    - text: "BD Solutions"
+      href: Journal2.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"

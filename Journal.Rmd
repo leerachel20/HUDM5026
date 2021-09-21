@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 Last compiled: `r Sys.Date()`
 
 # Chapter 3
-
+<br>
 
 ### 3.2.4 Exercises
 
@@ -33,6 +33,8 @@ ggplot(data = mpg)
 
 This is an empty plot since no layers were added with geom function.
 
+<br>
+<br>
 
 #### 2. How many rows are in `mtcars`? How many columns?
 ```{r}
@@ -42,6 +44,8 @@ ncol(mtcars)
 
 There are `r nrow(mtcars)` rows and `r ncol(mtcars)` columns in `mtcars`.
 
+<br>
+<br>
 
 #### 3. What does the `drv` variable describe? Read the help for `?mpg` to
 find out.
@@ -51,6 +55,8 @@ find out.
 
 `drv` is the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd.
 
+<br>
+<br>
 
 #### 4. Make a scatterplot of `hwy` versus `cyl`.
 ```{r}
@@ -58,6 +64,8 @@ ggplot(mpg, aes(x = cyl, y = hwy)) +
   geom_point()
 ```
 
+<br>
+<br>
 
 #### 5. What happens if you make a scatterplot of `class` versus `drv`?
 Why is the plot not useful?
@@ -73,6 +81,8 @@ mpg %>% distinct(class) # or unique(mpg$class)
 mpg %>% distinct(cyl)   # or unique(mpg$cyl)
 ```
 
+<br>
+<br>
 
 ### 3.3.1 Exercises
 
@@ -95,14 +105,15 @@ Or,
 ggplot(data = mpg, aes(x = displ, y = hwy)) +
   geom_point(colour = "blue")
 ```
-
+<br>
+<br>
 
 #### 2. Which variables in `mpg` are categorical? Which variables are continuous? (Hint: type `?mpg` to read the documentation for the dataset). How can you see this information when you run `mpg`?
 
 ```{r}
 head(mpg, 10) # or glipse(mpg)
 ```
-My initial screening is that Variables with `<chr>` are categorical, those with `<dbl>` and `<int>` are continuous. But if you take a closer look at the dataset, `cyl`, `disp` are categorical. `year`, `city`, and `hwy`discrete variables, but we can decide to treat it as continuous variables.
+My initial screening is that Variables with `<chr>` are categorical, those with `<dbl>` and `<int>` are continuous. If you take a closer look at the dataset, `cyl`, `disp` can be treated as categorical since there are categories of values the cars are stored under. `year`, `city`, and `hwy`discrete variables, but we can decide to treat it as continuous variables.
 
 
 #### 3. Map a continuous variable to `color`, `size`, and `shape`. How do these aesthetics behave differently for categorical vs. continuous variables?
@@ -121,118 +132,388 @@ It's intuitive that `cty` and `hwy` will show a positive linear relationship. Th
 
 
 ```{r}
-ggplot(mpg, aes(x = cty, y = hwy, color = year)) +
+ggplot(mpg, aes(x = cty, y = hwy, color = cyl)) +
   geom_point() +
   labs(title = "mpg dataset: hwy vs. cty", 
        caption = "mpg dataset", 
        x = "Highway miles per gallon", 
        y = "city miles per gallon",
-       color = "Year")
+       color = "Number of cylinders")
+```
+Now we set our `color` mapping to `cyl`, a continuous variable. The difference between mapping `color` to a categorical vs continuous variables is the legend. For categorical variables, distinct categories are created as the legend, while gradient scale is created for continuous variables.
+
+Now, let's take a look at the difference of categorical and continuous variables being mapped to `size`:
+
+
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, size = drv)) +
+  geom_point() +
+  labs(title = "mpg dataset: hwy vs. cty", 
+       caption = "mpg dataset", 
+       x = "Highway miles per gallon", 
+       y = "city miles per gallon",
+       size = "Type of drive train")
 ```
 
 
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, size = cyl)) +
+  geom_point() +
+  labs(title = "mpg dataset: hwy vs. cty", 
+       caption = "mpg dataset", 
+       x = "Highway miles per gallon", 
+       y = "city miles per gallon",
+       size = "Number of cylinders")
+```
 
+When mapped to size, the sizes of the points vary continuously as a function of their size.
+
+<br>
+<br>
+
+Now, let's assign the different variables types to `shape`.
+
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, shape = drv)) +
+  geom_point() +
+  labs(title = "mpg dataset: hwy vs. cty", 
+       caption = "mpg dataset", 
+       x = "Highway miles per gallon", 
+       y = "city miles per gallon",
+       shape = "Type of drive train")
+```
+When the categorical variable is mapped to `shape`, three types of drive train are assigned to different pointer shapes, and are mapped on the graph accordingly. Intuitively, we will not be able to map a continuous variable to shape. If you do, you will get the following error message from R:
+
+`Error: A continuous variable can not be mapped to shape Run `rlang::last_error()` to see where the error occurred.`
+
+<br>
+<br>
+
+#### 4. What happens if you map the same variable to multiple aesthetics?
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, size = cty, color = hwy, shape = drv)) +
+  geom_point() +
+  labs(title = "mpg dataset: hwy vs. cty", 
+       caption = "mpg dataset", 
+       x = "Highway miles per gallon", 
+       y = "city miles per gallon",
+       size = "city miles per gallon",
+       color = "Highway miles per gallon",
+       shape = "Type of drive train")
+```
+In the plot above, I mapped `cty` to both x-axis and size, and `hwy` to y-axis and color. The R runs and produces the messy graph due to redundant information. This is not advised - mapping a single varialbe to multiple aesthetics is a bad practice and should be avoided.
+
+<br>
+<br>
+
+#### 5. What does the `stroke` aesthetic do? What shapes does it work with? (Hint: use `?geom_point`)
+```{r}
+# ?geom_point
+ggplot(mpg, aes(x = displ, y = cty)) +
+  geom_point(shape = 23, color = "#CC79A7", fill = "#F0E442", size = 3, stroke = 2)
+```
+
+The `stroke` aesthetically modifies the width of the border for shapes. It works with shapes numbering 21 through 25, which are shapes that take the `fill` command with a specific color.
+
+<br>
+<br>
+
+#### 6. What happens if you map an aesthetic to something other than a variable name, like `aes(colour = displ < 5)`? Note, you’ll also need to specify x and y.
+
+```{r}
+ggplot(mpg, aes(x = cty, y = hwy, color = displ < 5)) +
+  geom_point()
+```
+
+You are able to specify equations as well as expressions for aesthetic mappings. In this case, `displ < 5` will return either `TRUE` or `FALSE`.
+
+<br>
+<br>
+
+### 3.5.1 Exercises
+
+#### 1. What happens if you facet on a continuous variable?
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(. ~ hwy)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_grid(. ~ hwy)
+```
+
+The primary use of facets is to add another categorical variable to your plot. The variable that you pass to `facet_wrap()` should be discrete. If you pass continuous variable, then it is converted to a categorical variable, and the plot will contain a facet for each distinct value.
+
+<br>
+<br>
+
+#### 2. What do the empty cells in plot with `facet_grid(drv ~ cyl)` mean? How do they relate to this plot?
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = drv, y = cyl))
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = cty, y = hwy)) +
+  facet_grid(drv ~ cyl)
+```
+
+The scatterplot of `drv` and `cyl` shows empty plots, and the empty cells matches where combinations of the two variables have no observations.
+
+<br>
+<br>
+
+#### 3. What plots does the following code make? What does `.` do?
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+```
+
+Everything on the left of the `~` will split according to rows, and everything on the right will split to columns. The `.` on the right hand side of the formula (`. ~ cyl`) fixes the `cyl` variable on the x-axis. If you want to flip the facets, this can be done as `cyl ~ .`.
+
+<br>
+<br>
+
+#### 4. Take the first faceted plot in this section:
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+```
+What are the advantages to using faceting instead of the color aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?  
+<br>
+
+Let's take the provided code, but add the color aesthetic instead of using faceting:
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = trans))
+```
+The advantage of adding color mapping is that we are able to add more information to the graph. For instance, we are now able to distinguish between the different types of transmission between engine displacement and highway miles per hour variables across type of cars. Note that using the color aesthetic can work against if there are many categories. In this case, readers may have a hard time differentiating the colors between manual(m5) and manual(m6).  
+
+The disadvantage of using faceting instead of the color aesthetic is the difficulty of comparing the observations between categories plotted across different plots. It is much easier to interpret the graph if the observations are plotted on the same x- and y-scales.
+
+<br>
+<br>
+
+#### 5. Read `?facet_wrap`. What does `nrow` do? What does `ncol` do? What other options control the layout of the individual panels? Why doesn’t `facet_grid()` have `nrow` and `ncol` arguments?
+
+```{r}
+# ?facet_wrap
+# ?facet_grid
+```
+
+`nrow` and `ncol` refers to the number of rows and columns used when laying out the facets. These arguments are needed given that `facet_wrap()` only takes one variable to create facets. The arguments does not exist for `facet_grid()` because the function determines the number of rows and columns from the unique values of the specified variables.
+
+<br>
+<br>
+
+#### 6. When using `facet_grid()` you should usually put the variable with more unique levels in the columns. Why?
+
+The simple reason is that there is more space for columns if the plots are laid out horizontally.
+
+<br>
+<br>
+
+### 3.6.1 Exercises
+
+#### 1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
+- `geom_line()`: line chart
+- `geom_boxplot()`: boxplot
+- `geom_histogram()`: histogram
+- `geom_area()`: area chart
+
+<br>
+<br>
+
+#### 2. Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.
+
+`geom_point()` will create a scatterplot with `displ` on the x-axis, `hwy` on the y-axis, `drv` grouped and colored. `geom_smooth()` will create a smooth line, and `se = FALSE` will suppress standard errors. 
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)
+```
+<br>
+<br>
+
+#### 3. What does `show.legend = FALSE` do? What happens if you remove it? Why do you think I used it earlier in the chapter?
+
+The code below is from this chapter where the authors have `show.legend = FALSE`.
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(
+    mapping = aes(x = displ, y = hwy, colour = drv),
+    show.legend = FALSE
+  )
+```
+
+Here is the same code with `show.legend = TRUE`:
+
+```{r}
+ggplot(data = mpg) +
+  geom_smooth(
+    mapping = aes(x = displ, y = hwy, colour = drv),
+    show.legend = TRUE
+  )
+```
+
+Adding the legend would be beneficial if the authors decided to use a single graph. However, with three graphs adjacent to each other, adding a legend to only the last graph may confuse readers, as well as offset the plot sizes. Moreover, the authors intention of using the three graphs altogether was to show the difference adding extra `group` or `color` mappings to aesthetics. Therefore, legend was not necessary.
+
+<br>
+<br>
+
+#### 4. What does the `se` argument to `geom_smooth()` do?
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth(data = filter(mpg, class == "subcompact"), se = TRUE)
+```
+
+As it can be seen from the two graphs, the `se` argument adds the standard error bands to the lines.
+
+<br>
+<br>
+
+#### 5. Will these two graphs look different? Why/why not?
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+
+ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+```
+
+The first set of code has the mapping: `aes(x = displ, y = hwy)`, which is passed down to `geom_point()` and `geom_smooth()`. For the second set of code, it still uses the same mapping for both `geom_point()` and `geom_smooth()` through specification. Therefore, the two graphs will look identical.
+
+<br>
+<br>
+
+#### 6. Recreate the R code necessary to generate the following graphs.
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(aes(group=drv), se = FALSE)
+
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv)) +
+  geom_smooth(se = FALSE)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv)) +
+  geom_smooth(aes(linetype = drv), se = FALSE)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 5, color = "white") +
+  geom_point(aes(color = drv))
+```
+
+<br>
+<br>
+
+### 3.7.1 Exercises
+
+#### 1. What is the default geom associated with `stat_summary()`? How could you rewrite the previous plot to use that geom function instead of the stat function?
+
+I assume this is what the authors mean by previous plot:
+```{r}
+ggplot(data = diamonds) + 
+  stat_summary(
+    mapping = aes(x = cut, y = depth),
+    fun.min = min,
+    fun.max = max,
+    fun = median
+  )
+```
+
+The documentation available by `?stat_summary` shows that `geom = "pointrage"`. The documentation for`?geom_pointrange` reads that it is various ways of representing vertical interval defined by `x`, `ymin`, and `ymax`. So here is what we can write using the `geom_pointrange()` instead of the `stat_summary()` function:
+
+```{r}
+ggplot(data = diamonds) +
+  geom_pointrange(
+    mapping = aes(x = cut, y = depth),
+    stat = "summary",
+    fun = median,
+    fun.min = min,
+    fun.max = max
+  )
+```
+
+<br>
+<br>
+
+#### 2. What does `geom_col()` do? How is it different to `geom_bar()`?  
+
+There are two types of bar charts: `geom_bar()` and `geom_col()`. `geom_bar()` makes the height of the bar proportional to the number of cases in each group (or if the weight aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use `geom_col()` instead. `geom_bar()` uses `stat_count()` by default: it counts the number of cases at each x position. `geom_col()` uses `stat_identity()`: it leaves the data as is.  
+
+<br>
+<br>
+
+#### 3. Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?
+
+The following table is a list of all the pairs I compiled. There was a lesson from [DataCamp](https://www.datacamp.com) that covered this question. Also, this [site](https://ggplot2.tidyverse.org/reference/) contains list of all `geom_` and `stat_` functions available in `ggplot2`.
+
+|           Geom_           |           Stat_           |         Common Description    |
+|:-------------------------:|:-------------------------:|:-----------------------------:|
+| `geom_bar()`, `geom_col()`|      `stat_count()`       |           Bar charts          |
+|    `geom_bin2d()`         |      `stat_bin2d()`       |    Heatmap of 2d bin counts   |
+|     `geom_boxplot()`      |      `stat_boxplot()`     |A box and whiskers plot (in the style of Tukey)|
+| `geom_contour()`, `geom_contour_filled()`   |   `stat_contour()`, `stat_contour_filled()`| 2D contours of a 3D surface   |
+| `geom_count()`            |       `stat_sum()`        | Count overlapping points      |
+|`geom_density()`           | `stat_density()`,         | Smoothed density estimates|
+| `geom_density_2d()`       |  `stat_density_2d()`      |Contours of a 2D density estimate|
+| `geom_dotplot()`          | `stat_bindot()`           |    Dot plot                   |
+| `geom_function()`         |  `stat_function()`        |  Draw a function as a continuous curve|
+| `geom_hex()`              | `stat_bin_hex()`          | Hexagonal heatmap of 2d bin counts|
+|	`geom_freqpoly()`, `geom_histogram()`| `stat_bin()`   | Histograms and frequency polygons|
+| `geom_qq()`, `geom_qq_line()`| `stat_qq()`, `stat_qq_line()` | A quantile-quantile plot |
+| `geom_quantile()`         | `stat_quantile()`         | Quantile regression           |
+| `geom_sf()`               | `stat_sf()`               | Visualize sf objects          |
+| `geom_smooth()`           | `stat_smooth()`           | Smoothed conditional means    |
+| `geom_violin()`           | `stat_violin()`           | Violin plot                   |
+
+
+<br>
+<br>
+
+#### 4. What variables does `stat_smooth()` compute? What parameters control its behaviour?
+
+<br>
+<br>
+
+#### 5. In our proportion bar chart, we need to set group = 1. Why? In other words what is the problem with these two graphs?
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop)))
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = color, y = after_stat(prop)))
+```
 
 # Chapter 4
 
-## Second level header
 
-You can add more headers by adding more hashtags. These won't be put into the table of contents
+# Chapter 5
 
-### third level header
-
-Here's an even lower level header
-
-# My second post (note the order)
-
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
-
-I'm writing this tutorial going from the top down. And, this is how it will be printed. So, notice the second post is second in the list. If you want your most recent post to be at the top, then make a new post starting at the top. If you want the oldest first, do, then keep adding to the bottom
-
-# Adding R stuff
-
-So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the sam place. 
-
-So, let's say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:
-
-```{r}
-samples <- rnorm(100, mean=0, sd=1)
-hist(samples)
-```
-
-When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.
-
-# The big idea
-
-Use this lab journal to record what you do in R. This way I will be able to see what you are doing and help you along the way. You will also be creating a repository of all the things you do. You can make posts about everything. Learning specific things in R (project unrelated), and doing things for the project that we will discuss at the beginning of the Fall semester. You can get started now by fiddling around with googling things, and trying stuff out in R. I've placed some helpful starting links in the links page on this website
-
-# What can you do right now by yourself?
-
-It's hard to learn programming when you don't have specific problems that you are trying to solve. Everything just seems abstract.
-
-I wrote an [introductory programming book that introduces R](https://crumplab.github.io/programmingforpsych/), and gives some [concrete problems for you to solve](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
-
-To get the hang of journaling and solving the problems to learn programming, my suggestion is that you use this .Rmd file to solve the problems. It would look like this:
-
-# Problem 1
-
-Do simple math with numbers, addition, subtraction, multiplication, division
-
-```{r}
-1+2
-2*5
-5/3
-(1+6+4)/5
-
-```
-
-# Problem 2
-
-Put numbers into variables, do simple math on the variables
-
-```{r}
-a<-1
-b<-2
-a+b
-
-d<-c(1,2,3)
-e<-c(5,6,7)
-d+e
-d*e
-d/e
-
-```
-
-# Problem 3
-
-Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
-
-```{r}
-# for loop solution
-# i becomes the number 1 to 100 at each step of the loop
+# Chapter 6
 
 
-a <- length(100) # make empty variable, set length to 100
-for (i in 1:100){
-  a[i] <-i #assigns the number in i, to the ith index of a
-}
-
-print(a)
-
-# for loop solution #2
-
-a<-c() #create empty variable using combine command
-for (i in 1:100){
-  a<-c(a,i) # keeps combining a with itself and the new number in i
-}
-print(a)
-
-# seq solution
-a <- seq(1,100,1) # look up help for seq using ?seq() in console
-print(a)
-
-```
-
-# Replace this with problem 4
-
-And keep going. Try to solve the problems with different scripts that provide the same solution. Good luck, Happy coding.

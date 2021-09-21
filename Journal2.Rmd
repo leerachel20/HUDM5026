@@ -1,0 +1,32 @@
+---
+title: "Exercise Solutions"
+author: Rachel Lee
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+Last compiled: `r Sys.Date()`
+
+# Chapter 4
+```{r}
+# install.packages("data.table")
+library(data.table)
+```
+
+### 4.2.1 Exercises
+
+#### 1. Read in the pisa data set. Either the full data set (recommended to have > 8 Gb of RAM) or one of the smaller data sets.
+```{r}
+# pisa_student_data <- fread("CY07MSU_QMC_STU_QQQ.csv", na.strings = "")
+```

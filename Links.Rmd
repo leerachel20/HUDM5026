@@ -7,9 +7,13 @@ output: html_document
 
 [R](http://www.r-project.org) is a free open-source programming language that can be used for statistical analysis, data-simulation, graphing, and lots of other stuff. Another free program is [R-studio](http://www.rstudio.com), that provides a nice graphic interface for R. Download R first, then download R-studio. Both can run on PCs, Macs or Linux.
 
-### Additional R resources
+### Additional R resources I use
 
-1. Google is great, Google your problem
-2. [Stackoverflow](https://stackoverflow.com) is great, google will often take you there because someone has already asked your question, and someone else has answered, usually many people have answered your question many ways.
-3. This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/)
+1. [Introduction to R, vectors, data frames and matrices](http://tryr.codeschool.com)
+2. [Stackoverflow](https://stackoverflow.com)
+3. [A comprehensive online guide to using R](http://www.cookbook-r.com/)
+4. [Graphics guide, mostly ggplot2](ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf)
+5. [The dplyr package and pipes](seananderson.ca/2014/09/13/dplyr-intro.html)
+6. [Cheatsheets for ggplot, dplyr, Shiny, etc.](www.rstudio.com/resources/cheatsheets/)
+7. [Data wrangling cheatsheet, dplyr and tidyr](www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
