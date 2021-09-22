@@ -512,8 +512,4 @@ ggplot(data = diamonds) +
 # Chapter 4
 
 
-# Chapter 5
-
-# Chapter 6
-
 
