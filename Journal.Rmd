@@ -498,6 +498,7 @@ The following table is a list of all the pairs I compiled. There was a lesson fr
 
 #### 4. What variables does `stat_smooth()` compute? What parameters control its behaviour?
 
+
 <br>
 <br>
 

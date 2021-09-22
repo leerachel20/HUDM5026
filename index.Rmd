@@ -24,7 +24,6 @@ This site contains my exercise solutions for the book [R for Data Science](https
 
 
 
-
 </div>
 <div class="col-sm-6">
 
