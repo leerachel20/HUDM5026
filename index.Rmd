@@ -30,6 +30,6 @@ This site contains my exercise solutions for the book [R for Data Science](https
 
 
 <a href = "https://www.rstudio.com/">
-![](images/WrittenInR.gif)
+![](images/YourCode.jpeg)
 </a>
 </div>
