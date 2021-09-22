@@ -29,6 +29,7 @@ This site contains my exercise solutions for the book [R for Data Science](https
 <div class="col-sm-6">
 
 
+<a href = "https://www.rstudio.com/">
 ![](images/WrittenInR.gif)
 </a>
 </div>
