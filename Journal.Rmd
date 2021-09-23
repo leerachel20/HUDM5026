@@ -17,7 +17,7 @@ library(kableExtra)
 options(knitr.table.format = "latex")
 ```
 
-Last compiled: `r Sys.Date()`
+Last compiled: `r Sys.time()`
 
 <br>
 
@@ -559,17 +559,77 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point()
 ```
 
-Try running `dim(mpg)`. There should be 234 points on this graph, so we know the problem is that points over being over-plotted. We would need to adjust the position of the points. 
+Try running `dim(mpg)`. There should be 234 points on this graph, so we know the problem is that points over being over-plotted. We would need to adjust the position of the points.  
+
+Setting `position = "jitter"` fixes this problem.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_point(position = "jitter")
+```
 
 <br>
 <br>
 
 #### 2. What parameters to `geom_jitter()` control the amount of jittering?
 
+`?geom_jitter()` shows two parameters that control the amount of jittering. The `width` controls the amount of horizontal displacement, and `height` controls the amount of vertical displacement. You can play around by assigning different values to the two parameters.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter(width = 0)
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter(height = 0)
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter(width = 20)
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter(height = 20)
+```
+
+Note that if you assign 0s to both `height` and `width`, the resulting graph will be identical to the one made using `geom_point()`.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter(height = 0, width = 0)
+```
+
+
 <br>
 <br>
 
 #### 3. Compare and contrast `geom_jitter()` with `geom_count()`.
+
+`geom_jitter()` adds a small amount of random variation to th location of each point. It is a useful way of handling overplotting caused by discreteness in smaller datasets.  
+
+`geom_count()` counts the number of observations at each location, then maps the count to point area. It is also useful when you have discrete data and overplotting issue. Unlike `geom_jitter()`, `geom_count()` is able to create different size of the points relative to the number of observations.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter()
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_count()
+```
+
+With the `mpg` dataset, we see that `geom_count()` is starting to cause the problem of overplotting again.  
+
+We can play around with the `color`.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy, color = class)) +
+  geom_jitter()
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy, color = class)) +
+  geom_count()
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy, color = class)) +
+  geom_count(position = "jitter")
+```
+
+While the graphs did add an additional info of `class`, none of the graphs seems to solve the overplotting issue.
 
 <br>
 <br>
