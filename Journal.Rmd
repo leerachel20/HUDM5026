@@ -504,6 +504,14 @@ The following table is a list of all the pairs I compiled. There was a lesson fr
 
 #### 4. What variables does `stat_smooth()` compute? What parameters control its behaviour?
 
+Try running `?stat_smooth()` on your R console. `stat_smooth()` computes the following variables:
+
+- `y` or `x`: predicted value
+- `ymin` or `xmin`: lower pointwise confidence interval around the mean
+- `ymax' or `xmax`: upper pointwise confidence interval around the mean
+- `se`: standard error
+
+
 
 <br>
 <br>
