@@ -545,6 +545,8 @@ Here is the intended bar graph:
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1))
 ```
+Next section (3.8) explains how you can fill the bars with colors.  
+
 <br>
 <br>
 
@@ -556,6 +558,8 @@ ggplot(data = diamonds) +
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
   geom_point()
 ```
+
+Try running `dim(mpg)`. There should be 234 points on this graph, so we know the problem is that points over being over-plotted. We would need to adjust the position of the points. 
 
 <br>
 <br>
