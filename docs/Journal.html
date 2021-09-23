@@ -350,7 +350,9 @@ div.tocify {
 
 <p>Last compiled: 2021-09-23</p>
 <p><br></p>
-<p><em>For Week 3: read WG chapters 1-3.</em> <br> <br></p>
+<p>I write and update the solutions everyday. <span style=" font-weight: bold;    color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #D05A6E !important;">Please let me know of any typos.</span></p>
+<p><em>For Week 3: read WG chapters 1-3.</em></p>
+<p><br> <br></p>
 <div id="chapter-3" class="section level1">
 <h1>Chapter 3</h1>
 <p><br></p>
@@ -829,13 +831,8 @@ ggplot(mpg, aes(x = displ, y = cty)) +
 </div>
 <div id="what-variables-does-stat_smooth-compute-what-parameters-control-its-behaviour" class="section level4">
 <h4>4. What variables does <code>stat_smooth()</code> compute? What parameters control its behaviour?</h4>
-<p>Try running <code>?stat_smooth()</code> on your R console. <code>stat_smooth()</code> computes the following variables:</p>
-<ul>
-<li><code>y</code> or <code>x</code>: predicted value</li>
-<li><code>ymin</code> or <code>xmin</code>: lower pointwise confidence interval around the mean</li>
-<li><code>ymax' or</code>xmax`: upper pointwise confidence interval around the mean</li>
-<li><code>se</code>: standard error</li>
-</ul>
+<p>Try running <code>?stat_smooth()</code> on your R console. <code>stat_smooth()</code> computes the following variables: - <code>y</code> or <code>x</code>: Predicted value - <code>ymin</code> or <code>xmin</code>: Lower pointwise confidence interval around the mean - <code>ymax' or</code>xmax<code>: Upper pointwise confidence interval around the mean -</code>se`: Standard error</p>
+<p>The parameters controlling the behavior of <code>stat_smooth()</code>: - <code>method</code>: Smoothing method (function) to use, accepts either <code>NULL</code> or a character vector. - <code>formula</code>: Formula to use in smoothing function. - <code>se</code>: display confidence interval around smooth (<code>TRUE</code> by default) - <code>na.rm</code>: If <code>FALSE</code>, the default, missing values are removed with a warning. If <code>TRUE</code>, missing values are silently removed. - <code>orientation</code>: The orientation of the layer. - <code>show.legend</code>: <code>NA</code>, the default, includes if any aesthetics are mapped. - <code>method.args</code>: List of additional arguments passed on to the modelling function defined by <code>method</code>.</p>
 <p><br> <br></p>
 </div>
 <div id="in-our-proportion-bar-chart-we-need-to-set-group-1.-why-in-other-words-what-is-the-problem-with-these-two-graphs" class="section level4">

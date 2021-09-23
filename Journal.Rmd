@@ -13,13 +13,19 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+library(kableExtra)
+options(knitr.table.format = "latex")
 ```
 
 Last compiled: `r Sys.Date()`
 
 <br>
 
-*For Week 3: read WG chapters 1-3.*
+I write and update the solutions everyday. `r text_spec("Please let me know of any typos.", background = "#D05A6E", color = "white", bold = T)`
+ 
+
+*For Week 3: read WG chapters 1-3.*  
+
 <br>
 <br>
 
@@ -505,13 +511,19 @@ The following table is a list of all the pairs I compiled. There was a lesson fr
 #### 4. What variables does `stat_smooth()` compute? What parameters control its behaviour?
 
 Try running `?stat_smooth()` on your R console. `stat_smooth()` computes the following variables:
+- `y` or `x`: Predicted value
+- `ymin` or `xmin`: Lower pointwise confidence interval around the mean
+- `ymax' or `xmax`: Upper pointwise confidence interval around the mean
+- `se`: Standard error
 
-- `y` or `x`: predicted value
-- `ymin` or `xmin`: lower pointwise confidence interval around the mean
-- `ymax' or `xmax`: upper pointwise confidence interval around the mean
-- `se`: standard error
-
-
+The parameters controlling the behavior of `stat_smooth()`:
+- `method`: Smoothing method (function) to use, accepts either `NULL` or a character vector.
+- `formula`: Formula to use in smoothing function.
+- `se`: display confidence interval around smooth (`TRUE` by default)
+- `na.rm`:  If `FALSE`, the default, missing values are removed with a warning. If `TRUE`, missing values are silently removed.
+- `orientation`: The orientation of the layer.
+- `show.legend`: `NA`, the default, includes if any aesthetics are mapped.
+- `method.args`: List of additional arguments passed on to the modelling function defined by `method`.
 
 <br>
 <br>
