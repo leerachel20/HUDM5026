@@ -843,6 +843,34 @@ ggplot(mpg, aes(x = displ, y = cty)) +
 <pre class="r"><code>ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, fill = color, y = after_stat(prop)))</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
+<p>As you can see from the outpu graphs, without <code>group = 1</code>, all the bars end up with the same height. This is because the <code>geom_bar()</code> function assumes that the groups are equal to the <code>x</code> values since the stat computes the counts within the group.</p>
+<p>Note: Read about <code>?after_stat()</code> function. <code>prop</code> refers to percent of points in that panel in the position.</p>
+<p>Here is the intended bar graph:</p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-34-1.png" width="672" /> <br> <br></p>
+</div>
+</div>
+<div id="exercises-5" class="section level3">
+<h3>3.8.1 Exercises</h3>
+<div id="what-is-the-problem-with-this-plot-how-could-you-improve-it" class="section level4">
+<h4>1. What is the problem with this plot? How could you improve it?</h4>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><br> <br></p>
+</div>
+<div id="what-parameters-to-geom_jitter-control-the-amount-of-jittering" class="section level4">
+<h4>2. What parameters to <code>geom_jitter()</code> control the amount of jittering?</h4>
+<p><br> <br></p>
+</div>
+<div id="compare-and-contrast-geom_jitter-with-geom_count." class="section level4">
+<h4>3. Compare and contrast <code>geom_jitter()</code> with <code>geom_count()</code>.</h4>
+<p><br> <br></p>
+</div>
+<div id="whats-the-default-position-adjustment-for-geom_boxplot-create-a-visualisation-of-the-mpg-dataset-that-demonstrates-it." class="section level4">
+<h4>4. What’s the default position adjustment for <code>geom_boxplot()</code>? Create a visualisation of the <code>mpg</code> dataset that demonstrates it.</h4>
+<p><br> <br></p>
 </div>
 </div>
 </div>

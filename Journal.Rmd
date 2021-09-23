@@ -536,6 +536,46 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut, fill = color, y = after_stat(prop)))
 ```
 
+As you can see from the outpu graphs, without `group = 1`, all the bars end up with the same height. This is because the `geom_bar()` function assumes that the groups are equal to the `x` values since the stat computes the counts within the group.   
+
+Note: Read about `?after_stat()` function. `prop` refers to percent of points in that panel in the position.  
+
+Here is the intended bar graph:  
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1))
+```
+<br>
+<br>
+
+### 3.8.1 Exercises
+
+#### 1. What is the problem with this plot? How could you improve it?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()
+```
+
+<br>
+<br>
+
+#### 2. What parameters to `geom_jitter()` control the amount of jittering?
+
+<br>
+<br>
+
+#### 3. Compare and contrast `geom_jitter()` with `geom_count()`.
+
+<br>
+<br>
+
+#### 4. What’s the default position adjustment for `geom_boxplot()`? Create a visualisation of the `mpg` dataset that demonstrates it.
+
+<br>
+<br>
+
+
 # Chapter 4
 
 ## Coming soon...
