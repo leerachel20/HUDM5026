@@ -1,5 +1,5 @@
 ---
-title: "Exercise Solutions"
+title: "WG Ch5 Exercise Solutions"
 author: Rachel Lee
 output:
   html_document:
@@ -7,7 +7,7 @@ output:
     toc_float: true
     collapsed: false
     number_sections: false
-    toc_depth: 1
+    toc_depth: 3
     #code_folding: hide
 ---
 
@@ -693,10 +693,4 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
 
 <br>
 <br>
-
-
-
-# Chapter 4
-
-## Coming soon...
 

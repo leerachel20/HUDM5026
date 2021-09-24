@@ -4,9 +4,9 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "WG Solutions"
+    - text: "WG Ch3"
       href: Journal.html
-    - text: "BD Solutions"
+    - text: "WG Ch4"
       href: Journal2.html
     - text: "Links"
       href: Links.html

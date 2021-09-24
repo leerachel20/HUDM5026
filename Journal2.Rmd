@@ -1,5 +1,5 @@
 ---
-title: "Exercise Solutions"
+title: "WG Ch4 Exercise Solutions"
 author: Rachel Lee
 output:
   html_document:
@@ -7,15 +7,26 @@ output:
     toc_float: true
     collapsed: false
     number_sections: false
-    toc_depth: 1
+    toc_depth: 3
     #code_folding: hide
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+library(kableExtra)
+options(knitr.table.format = "latex")
 ```
 
-Last compiled: `r Sys.Date()`
+Last compiled: `r Sys.time()`
 
-## Coming Soon...
+<br>
+
+*For Week 4: read WG chapters 4-5.*  
+
+<br>
+<br>
+
+# Chapter 4
+<br>
+
+### coming soon...
