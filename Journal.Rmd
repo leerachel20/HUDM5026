@@ -123,7 +123,7 @@ ggplot(data = mpg, aes(x = displ, y = hwy)) +
 #### 2. Which variables in `mpg` are categorical? Which variables are continuous? (Hint: type `?mpg` to read the documentation for the dataset). How can you see this information when you run `mpg`?
 
 ```{r}
-head(mpg, 10) # or glipse(mpg)
+head(mpg, 10) # or glimpse(mpg)
 ```
 My initial screening is that Variables with `<chr>` are categorical, those with `<dbl>` and `<int>` are continuous. If you take a closer look at the dataset, `cyl`, `disp` can be treated as categorical since there are categories of values the cars are stored under. `year`, `city`, and `hwy`discrete variables, but we can decide to treat it as continuous variables.
 
