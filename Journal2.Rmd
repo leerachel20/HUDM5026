@@ -72,8 +72,6 @@ This gives a menu with keyboard shortcuts. You can also access htem in the menu 
 
 <br>
 <br>
-
-# Chapter 4
 <br>
 
 # Chapter 5
@@ -89,7 +87,7 @@ library(tidyverse)
 filter(flights, arr_delay >= 120)
 ```
 
-2. Flew to Houston (IAH or HOU)]
+2. Flew to Houston (IAH or HOU)
 ```{r}
 filter(flights, dest == "IAH" | dest == "HOU")
 ```
@@ -98,13 +96,45 @@ If you have been practicing on DataCamp, you may have this code below that also 
 filter(flights, dest %in% c("IAH", "HOU"))
 ```
 
-3. Were operated by United, American, or Delta
+3. Were operated by United, American, or Delta  
+
+You first need to look up the abbreviations for airlines.
+```{r}
+airlines
+```
+
+Now using the carrier codes, we can find those operated by the three specified airlines:
+```{r}
+filter(flights, carrier %in% c("AA", "DL", "UA"))
+```
+
+4. Departed in summer (July, August, and September)
+
+Any one of the four codes will produce the same output. *Note: my outputs are suppressed using the rmd function `results = FALSE`.*
+```{r results = FALSE}
+filter(flights, month >= 7 & month <= 9)
+filter(flights, month %in% 7:9)
+filter(flights, month >= 7, month <= 9)
+filter(flights, month == 7 | month == 8 | month == 9)
+```
+
+5. Arrived more than two hours late, but didn’t leave late
+```{r}
+filter(flights, arr_delay > 120 & dep_delay <= 0)
+```
+
+6. Were delayed by at least an hour, but made up over 30 minutes in flight
+```{r}
+filter(flights, dep_delay >= 60, dep_delay - arr_delay > 30)
+```
+
+7. Departed between midnight and 6am (inclusive)
 ```{r}
 
 ```
 
-4. Departed in summer (July, August, and September)
-5. Arrived more than two hours late, but didn’t leave late
-6. Were delayed by at least an hour, but made up over 30 minutes in flight
-7. Departed between midnight and 6am (inclusive)
+
+
+
+
 
