@@ -23,7 +23,7 @@ Last compiled: `r Sys.time()`
 
 *For Week 4: read WG chapters 4-5.*  
 
-*Thank you Jean for catching some typos last week.*
+*Thank you Jean for catching some typos last week :)*
 
 <br>
 <br>
@@ -141,6 +141,38 @@ filter(flights, dep_delay >= 60, dep_delay - arr_delay > 30)
 ```{r}
 filter(flights, dep_time == 2400 | dep_time <= 600)
 ```
+<br>
+<br>
+
+#### 2. Another useful dplyr filtering helper is `between()`. What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+
+`?between()` shows the usage. It takes 3 arguments: `x`, `left`, and `right`. Try running `between(1:12, 7, 9)`:
+```{r}
+between(1:12, 7, 9)
+```
+
+We can use this function to simploy the previous question:
+```{r}
+filter(flights, between(month, 7, 9))
+```
+
+<br>
+<br>
+
+#### 3. How many flights have a missing `dep_time`? What other variables are missing? What might these rows represent?
+
+We can use `is.na()` function. DataCamp covers this function with numerous examples.
+```{r}
+flights %>% filter(is.na(dep_time))
+flights %>% filter(is.na(dep_time)) %>% count()
+```
+From the given output table, `arr_time` and `dep_delay` are also missing. There are 8255 flights with missing `dep_time`.  
+
+<br>
+<br>
+
+#### 4. Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing? Why is `FALSE & NA` not missing? Can you figure out the general rule? (`NA * 0` is a tricky counterexample!)
+
 <br>
 <br>
 
