@@ -12,7 +12,7 @@
 <meta name="author" content="Rachel Lee" />
 
 
-<title>WG Ch4 Exercise Solutions</title>
+<title>WG Ch4 &amp; Ch5 Exercise Solutions</title>
 
 <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -325,7 +325,7 @@ div.tocify {
   <a href="Journal.html">WG Ch3</a>
 </li>
 <li>
-  <a href="Journal2.html">WG Ch4</a>
+  <a href="Journal2.html">WG Ch4:5</a>
 </li>
 <li>
   <a href="Links.html">Links</a>
@@ -342,21 +342,101 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">WG Ch4 Exercise Solutions</h1>
+<h1 class="title toc-ignore">WG Ch4 &amp; Ch5 Exercise Solutions</h1>
 <h4 class="author">Rachel Lee</h4>
 
 </div>
 
 
-<p>Last compiled: 2021-09-27 17:23:23</p>
+<p>Last compiled: 2021-09-28 12:59:12</p>
 <p><br></p>
 <p><em>For Week 4: read WG chapters 4-5.</em></p>
+<p><em>Thank you Jean for catching some typos last week.</em></p>
 <p><br> <br></p>
 <div id="chapter-4" class="section level1">
 <h1>Chapter 4</h1>
 <p><br></p>
-<div id="coming-soon" class="section level3">
-<h3>coming soon…</h3>
+<div id="exercises" class="section level3">
+<h3>4.4 Exercises</h3>
+<div id="why-does-this-code-not-work" class="section level4">
+<h4>1. Why does this code not work?</h4>
+<pre class="r"><code>my_variable &lt;- 10
+my_varıable</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>#&gt; Error in eval(expr, envir, enclos): object &#39;my_varıable&#39; not found</code></pre>
+<p>If you look carefully, <code>my_variable</code> is different from <code>my_varıable</code>. Reading the error messages help: <code>object 'my_varıable' not found</code> is very clear on where R is finding the error.</p>
+<p><br> <br></p>
+</div>
+<div id="tweak-each-of-the-following-r-commands-so-that-they-run-correctly." class="section level4">
+<h4>2. Tweak each of the following R commands so that they run correctly.</h4>
+<p>The corrected code should look like this:</p>
+<pre class="r"><code>library(tidyverse)
+
+# spelling mistake; change to data
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))</code></pre>
+<p><img src="Journal2_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code># set cyl == 8
+filter(mpg, cyl == 8)</code></pre>
+<pre><code>## # A tibble: 70 x 11
+##    manufacturer model     displ  year   cyl trans  drv     cty   hwy fl    class
+##    &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 audi         a6 quatt~   4.2  2008     8 auto(~ 4        16    23 p     mids~
+##  2 chevrolet    c1500 su~   5.3  2008     8 auto(~ r        14    20 r     suv  
+##  3 chevrolet    c1500 su~   5.3  2008     8 auto(~ r        11    15 e     suv  
+##  4 chevrolet    c1500 su~   5.3  2008     8 auto(~ r        14    20 r     suv  
+##  5 chevrolet    c1500 su~   5.7  1999     8 auto(~ r        13    17 r     suv  
+##  6 chevrolet    c1500 su~   6    2008     8 auto(~ r        12    17 r     suv  
+##  7 chevrolet    corvette    5.7  1999     8 manua~ r        16    26 p     2sea~
+##  8 chevrolet    corvette    5.7  1999     8 auto(~ r        15    23 p     2sea~
+##  9 chevrolet    corvette    6.2  2008     8 manua~ r        16    26 p     2sea~
+## 10 chevrolet    corvette    6.2  2008     8 auto(~ r        15    25 p     2sea~
+## # ... with 60 more rows</code></pre>
+<pre class="r"><code># data name is diamonds, not diamond
+filter(diamonds, carat &gt; 3)</code></pre>
+<pre><code>## # A tibble: 32 x 10
+##    carat cut     color clarity depth table price     x     y     z
+##    &lt;dbl&gt; &lt;ord&gt;   &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  3.01 Premium I     I1       62.7    58  8040  9.1   8.97  5.67
+##  2  3.11 Fair    J     I1       65.9    57  9823  9.15  9.02  5.98
+##  3  3.01 Premium F     I1       62.2    56  9925  9.24  9.13  5.73
+##  4  3.05 Premium E     I1       60.9    58 10453  9.26  9.25  5.66
+##  5  3.02 Fair    I     I1       65.2    56 10577  9.11  9.02  5.91
+##  6  3.01 Fair    H     I1       56.1    62 10761  9.54  9.38  5.31
+##  7  3.65 Fair    H     I1       67.1    53 11668  9.53  9.48  6.38
+##  8  3.24 Premium H     I1       62.1    58 12300  9.44  9.4   5.85
+##  9  3.22 Ideal   I     I1       62.6    55 12545  9.49  9.42  5.92
+## 10  3.5  Ideal   H     I1       62.8    57 12587  9.65  9.59  6.03
+## # ... with 22 more rows</code></pre>
+<p><br> <br></p>
+</div>
+<div id="press-alt-shift-k.-what-happens-how-can-you-get-to-the-same-place-using-the-menus" class="section level4">
+<h4>3. Press Alt + Shift + K. What happens? How can you get to the same place using the menus?</h4>
+<p>This gives a menu with keyboard shortcuts. You can also access htem in the menu under <code>Tools -&gt; Keyboard Shortcuts Help</code>.</p>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+<div id="chapter-4-1" class="section level1">
+<h1>Chapter 4</h1>
+<p><br></p>
+</div>
+<div id="chapter-5" class="section level1">
+<h1>Chapter 5</h1>
+<div id="exercises-1" class="section level3">
+<h3>5.2 Exercises</h3>
+<div id="find-all-flights-that" class="section level4">
+<h4>1. Find all flights that</h4>
+<ol style="list-style-type: decimal">
+<li>Had an arrival delay of two or more hours</li>
+<li>Flew to Houston (IAH or HOU)</li>
+<li>Were operated by United, American, or Delta</li>
+<li>Departed in summer (July, August, and September)</li>
+<li>Arrived more than two hours late, but didn’t leave late</li>
+<li>Were delayed by at least an hour, but made up over 30 minutes in flight</li>
+<li>Departed between midnight and 6am (inclusive)</li>
+</ol>
+</div>
 </div>
 </div>
 

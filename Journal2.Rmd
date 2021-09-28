@@ -1,5 +1,5 @@
 ---
-title: "WG Ch4 Exercise Solutions"
+title: "WG Ch4 & Ch5 Exercise Solutions"
 author: Rachel Lee
 output:
   html_document:
@@ -22,6 +22,7 @@ Last compiled: `r Sys.time()`
 <br>
 
 *For Week 4: read WG chapters 4-5.*  
+
 *Thank you Jean for catching some typos last week.*
 
 <br>
@@ -69,6 +70,41 @@ filter(diamonds, carat > 3)
 
 This gives a menu with keyboard shortcuts. You can also access htem in the menu under `Tools -> Keyboard Shortcuts Help`.
 
+<br>
+<br>
 
+# Chapter 4
+<br>
 
+# Chapter 5
+
+### 5.2 Exercises
+```{r}
+library(nycflights13)
+library(tidyverse)
+```
+#### 1. Find all flights that
+1. Had an arrival delay of two or more hours
+```{r}
+filter(flights, arr_delay >= 120)
+```
+
+2. Flew to Houston (IAH or HOU)]
+```{r}
+filter(flights, dest == "IAH" | dest == "HOU")
+```
+If you have been practicing on DataCamp, you may have this code below that also produces the same output:
+```{r}
+filter(flights, dest %in% c("IAH", "HOU"))
+```
+
+3. Were operated by United, American, or Delta
+```{r}
+
+```
+
+4. Departed in summer (July, August, and September)
+5. Arrived more than two hours late, but didn’t leave late
+6. Were delayed by at least an hour, but made up over 30 minutes in flight
+7. Departed between midnight and 6am (inclusive)
 
