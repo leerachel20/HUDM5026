@@ -82,7 +82,7 @@ ggplot(mpg, aes(x = cyl, y = hwy)) +
 #### 5. What happens if you make a scatterplot of `class` versus `drv`?
 Why is the plot not useful?
 ```{r}
-ggplot(mpg, aes(x = class, y = drv)) +
+ggplot(mpg, aes(x = drv, y = class)) +
   geom_point()
 ```
 
