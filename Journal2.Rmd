@@ -173,6 +173,17 @@ From the given output table, `arr_time` and `dep_delay` are also missing. There 
 
 #### 4. Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing? Why is `FALSE & NA` not missing? Can you figure out the general rule? (`NA * 0` is a tricky counterexample!)
 
+```{r}
+NA^0
+NA | TRUE
+FALSE & NA
+NA * 0
+```
+`NA^0` results in 1 for the same reason that any number raised to 0th power is 1.  
+`NA | TRUE` because `|` means "OR". So, anything or `TRUE` is `TRUE`.  
+`FALSE & NA` is `FALSE` because `&` means "AND". Anything AND `FALSE` is `FALSE`.  
+`NA * 0` is `NA` because `NA` contains undefined values, such as negative or positive infinity.  
+
 <br>
 <br>
 
@@ -180,11 +191,25 @@ From the given output table, `arr_time` and `dep_delay` are also missing. There 
 
 #### 1. How could you use `arrange()` to sort all missing values to the start? (Hint: use `is.na()`).
 
+We will use the `flights` dataset.
+
+```{r}
+flights %>% arrange(is.na(dep_time))
+```
+It look slike `arrange(is.na(dep_time))` is placing those with `NA` at the very last. This is because R always handles `TRUE > FALSE`. Therefore, if we use the `desc()` function around `is.na()`, it should give us the correct result.
+
+```{r}
+flights %>% arrange(desc(is.na(dep_time)))
+```
+
 <br>
 <br>
 
 #### 2. Sort flights to find the most delayed flights. Find the flights that left earliest.
 
+```{r}
+flights %>% arrange(desc(dep_delay))
+```
 <br>
 <br>
 
