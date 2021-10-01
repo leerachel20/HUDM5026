@@ -28,7 +28,7 @@ Last compiled: `r Sys.time()`
 <br>
 <br>
 
-# Chapter 4
+# Chapter 4 
 <br>
 
 ### 4.4 Exercises
