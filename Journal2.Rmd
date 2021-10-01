@@ -210,15 +210,112 @@ flights %>% arrange(desc(is.na(dep_time)))
 ```{r}
 flights %>% arrange(desc(dep_delay))
 ```
+
+Most delayed flight was HA51 from JFK to HNL. It was delayed for 1301 minutes.  
+
+Finding the flights that left the earliest is as follows:
+
+```{r}
+flights %>% arrange(dep_delay)
+```
+
 <br>
 <br>
 
 #### 3. Sort flights to find the fastest (highest speed) flights.
 
+```{r}
+flights %>% arrange(desc(distance/air_time))
+```
+
+We can find the speed of flights by dividing `distance` by `air_time`.
+
 <br>
 <br>
 
 #### 4. Which flights travelled the farthest? Which travelled the shortest?
+
+Finding the flights that traveled the farthest:
+
+```{r}
+flights %>% arrange(desc(distance))
+```
+
+Flights that traveled the shortest:
+
+```{r}
+flights %>% arrange(distance)
+```
+<br>
+<br>
+
+### 5.4 Exercises
+
+#### 1. Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
+
+```{r}
+flights %>% select(dep_time, dep_delay, arr_time, arr_delay)
+flights %>% select(4, 6, 7, 9) #specifying column numbers
+flights %>% select(starts_with("dep_"), starts_with("arr_"))
+```
+
+If you can think of anymore, please email me!
+
+<br>
+<br>
+
+#### 2. What happens if you include the name of a variable multiple times in a `select()` call?
+
+We can try this.
+```{r}
+flights %>% select(year, year, day, day, day)
+```
+
+So it looks like R ignores the duplicated commands and selects the called column once.
+
+<br>
+<br>
+
+#### 3. What does the `any_of()` function do? Why might it be helpful in conjunction with this vector?
+
+```{r}
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+```
+
+`?any_of()` documentation reads that the function will select variables with a character vector rather than unquoted variable name arguments. Below is how it can be used using the `vars` called earlier.
+
+```{r}
+flights %>% select(one_of(vars))
+```
+
+<br>
+<br>
+
+#### 4. Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?
+
+```{r}
+select(flights, contains("TIME"))
+```
+
+This might be surprising because the default behavior for contains() is to ignore upper or lower cases. You can find this by reading the documetation of `contains()`. We can manually turn this off by adding `ignore.case = FALSE`:
+
+```{r}
+select(flights, contains("TIME", ignore.case = FALSE))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
