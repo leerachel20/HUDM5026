@@ -39,10 +39,29 @@ library(tidyverse)
 summary(select(diamonds, x, y, z))
 ```
 
-The summary of the selected variables provides a good initial scan of our dataset.
+The summary of the selected variables provides a good initial scan of our dataset. Note that `x` variable is the diamond length in mm, `y` is width in mm, and `z` is depth in mm. The typical values of `x` and `y` are larger than `z`, with `x` and `y` having inter-quartile ranges of 4.7–6.5, while `z` has an inter-quartile range of 2.9–4.0.
 
+```{r}
+diamonds %>% arrange(desc(x)) %>% top_n(5)
+diamonds %>% arrange(desc(y)) %>% top_n(5)
+diamonds %>% arrange(desc(z)) %>% top_n(5)
+```
+
+The top 5 diamonds with largest `x`, `y`, and `z` are shown above. We suspect that `y = 58.90` may be a typo. We can attempt to see the outliers visually:
+
+```{r}
+ggplot(diamonds, aes(x = x, y = y)) +
+  geom_point(alpha = 0.5)
+ggplot(diamonds, aes(x = x, y = z)) +
+  geom_point(alpha = 0.5)
+ggplot(diamonds, aes(x = y, y = z)) +
+  geom_point(alpha = 0.5)
+```
 <br>
 <br>
+
+#### 2. Explore the distribution of `price`. Do you discover anything unusual or surprising? (Hint: Carefully think about the binwidth and make sure you try a wide range of values.)
+
 
 
 
