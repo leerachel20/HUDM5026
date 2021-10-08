@@ -8,6 +8,8 @@ navbar:
       href: Journal.html
     - text: "WG Ch4:5"
       href: Journal2.html
+    - text: "WG Ch7:8"
+      href: Journal3.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"

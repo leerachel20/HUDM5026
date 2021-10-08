@@ -1,0 +1,53 @@
+---
+title: "WG Ch7 & Ch8 Exercise Solutions"
+author: Rachel Lee
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 3
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+library(kableExtra)
+options(knitr.table.format = "latex")
+```
+
+Last compiled: `r Sys.time()`
+
+<br>
+
+*For Week 5: read WG chapters 6-8.*  
+
+
+<br>
+<br>
+
+# Chapter 7 
+<br>
+
+### 7.3 Exercises
+
+#### 1. Explore the distribution of each of the `x`, `y`, and `z` variables in diamonds. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.
+
+```{r}
+library(tidyverse)
+summary(select(diamonds, x, y, z))
+```
+
+The summary of the selected variables provides a good initial scan of our dataset.
+
+<br>
+<br>
+
+
+
+
+
+
+
+
