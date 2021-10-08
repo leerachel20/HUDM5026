@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Rachel Lee" />
+
+
+<title>WG Ch7 &amp; Ch8 Exercise Solutions</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Journal</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Journal.html">WG Ch3</a>
+</li>
+<li>
+  <a href="Journal2.html">WG Ch4:5</a>
+</li>
+<li>
+  <a href="Journal3.html">WG Ch7:8</a>
+</li>
+<li>
+  <a href="Links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">WG Ch7 &amp; Ch8 Exercise Solutions</h1>
+<h4 class="author">Rachel Lee</h4>
+
+</div>
+
+
+<p>Last compiled: 2021-10-07 22:47:54</p>
+<p><br></p>
+<p><em>For Week 5: read WG chapters 6-8.</em></p>
+<p><br> <br></p>
+<div id="chapter-7" class="section level1">
+<h1>Chapter 7</h1>
+<p><br></p>
+<div id="exercises" class="section level3">
+<h3>7.3 Exercises</h3>
+<div id="explore-the-distribution-of-each-of-the-x-y-and-z-variables-in-diamonds.-what-do-you-learn-think-about-a-diamond-and-how-you-might-decide-which-dimension-is-the-length-width-and-depth." class="section level4">
+<h4>1. Explore the distribution of each of the <code>x</code>, <code>y</code>, and <code>z</code> variables in diamonds. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.</h4>
+<pre class="r"><code>library(tidyverse)
+summary(select(diamonds, x, y, z))</code></pre>
+<pre><code>##        x                y                z         
+##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.: 4.710   1st Qu.: 4.720   1st Qu.: 2.910  
+##  Median : 5.700   Median : 5.710   Median : 3.530  
+##  Mean   : 5.731   Mean   : 5.735   Mean   : 3.539  
+##  3rd Qu.: 6.540   3rd Qu.: 6.540   3rd Qu.: 4.040  
+##  Max.   :10.740   Max.   :58.900   Max.   :31.800</code></pre>
+<p>The summary of the selected variables provides a good initial scan of our dataset. Note that <code>x</code> variable is the diamond length in mm, <code>y</code> is width in mm, and <code>z</code> is depth in mm. The typical values of <code>x</code> and <code>y</code> are larger than <code>z</code>, with <code>x</code> and <code>y</code> having inter-quartile ranges of 4.7–6.5, while <code>z</code> has an inter-quartile range of 2.9–4.0.</p>
+<pre class="r"><code>diamonds %&gt;% arrange(desc(x)) %&gt;% top_n(5)</code></pre>
+<pre><code>## # A tibble: 5 x 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  5.01 Fair      J     I1       65.5  59   18018 10.7  10.5   6.98
+## 2  4.5  Fair      J     I1       65.8  58   18531 10.2  10.2   6.72
+## 3  4.13 Fair      H     I1       64.8  61   17329 10     9.85  6.43
+## 4  2    Premium   H     SI2      58.9  57   12210  8.09 58.9   8.06
+## 5  0.51 Very Good E     VS1      61.8  54.7  1970  5.12  5.15 31.8</code></pre>
+<pre class="r"><code>diamonds %&gt;% arrange(desc(y)) %&gt;% top_n(5)</code></pre>
+<pre><code>## # A tibble: 5 x 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  2    Premium   H     SI2      58.9  57   12210  8.09 58.9   8.06
+## 2  5.01 Fair      J     I1       65.5  59   18018 10.7  10.5   6.98
+## 3  4.5  Fair      J     I1       65.8  58   18531 10.2  10.2   6.72
+## 4  4.13 Fair      H     I1       64.8  61   17329 10     9.85  6.43
+## 5  0.51 Very Good E     VS1      61.8  54.7  1970  5.12  5.15 31.8</code></pre>
+<pre class="r"><code>diamonds %&gt;% arrange(desc(z)) %&gt;% top_n(5)</code></pre>
+<pre><code>## # A tibble: 5 x 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  0.51 Very Good E     VS1      61.8  54.7  1970  5.12  5.15 31.8 
+## 2  2    Premium   H     SI2      58.9  57   12210  8.09 58.9   8.06
+## 3  5.01 Fair      J     I1       65.5  59   18018 10.7  10.5   6.98
+## 4  4.5  Fair      J     I1       65.8  58   18531 10.2  10.2   6.72
+## 5  4.13 Fair      H     I1       64.8  61   17329 10     9.85  6.43</code></pre>
+<p>The top 5 diamonds with largest <code>x</code>, <code>y</code>, and <code>z</code> are shown above. We suspect that <code>y = 58.90</code> may be a typo. We can attempt to see the outliers visually:</p>
+<pre class="r"><code>ggplot(diamonds, aes(x = x, y = y)) +
+  geom_point(alpha = 0.5)</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(diamonds, aes(x = x, y = z)) +
+  geom_point(alpha = 0.5)</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(diamonds, aes(x = y, y = z)) +
+  geom_point(alpha = 0.5)</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-3-3.png" width="672" /> <br> <br></p>
+</div>
+<div id="explore-the-distribution-of-price.-do-you-discover-anything-unusual-or-surprising-hint-carefully-think-about-the-binwidth-and-make-sure-you-try-a-wide-range-of-values." class="section level4">
+<h4>2. Explore the distribution of <code>price</code>. Do you discover anything unusual or surprising? (Hint: Carefully think about the binwidth and make sure you try a wide range of values.)</h4>
+<pre class="r"><code>ggplot(filter(diamonds, price &lt; 10000), aes(x = price)) +
+  geom_histogram(binwidth = 10, center = 0)</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>From our graph above, We see something is off. To get a close-up view, we restrict the <code>price</code> range:</p>
+<pre class="r"><code>ggplot(filter(diamonds, price &lt; 2000), aes(x = price)) +
+  geom_histogram(binwidth = 10, center = 0)</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>There are no diamonds with a price between $1,455 and $1,545.</p>
+<p><br></p>
+<p>Are there anything else you notice?</p>
+<p><br> <br></p>
+</div>
+<div id="how-many-diamonds-are-0.99-carat-how-many-are-1-carat-what-do-you-think-is-the-cause-of-the-difference" class="section level4">
+<h4>3. How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference?</h4>
+<pre class="r"><code>diamonds %&gt;%
+  filter(carat &gt;= 0.99, carat &lt;= 1) %&gt;%
+  count(carat)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   carat     n
+##   &lt;dbl&gt; &lt;int&gt;
+## 1  0.99    23
+## 2  1     1558</code></pre>
+<p>There are 23 diamonds that are 0.99 carat weight, while 1558 diamonds with 1.00 carat weight. Maybe diamond sellers round up the carat? I am not too sure.</p>
+<p><br> <br></p>
+</div>
+<div id="compare-and-contrast-coord_cartesian-vs-xlim-or-ylim-when-zooming-in-on-a-histogram.-what-happens-if-you-leave-binwidth-unset-what-happens-if-you-try-and-zoom-so-only-half-a-bar-shows" class="section level4">
+<h4>4. Compare and contrast <code>coord_cartesian()</code> vs <code>xlim()</code> or <code>ylim()</code> when zooming in on a histogram. What happens if you leave <code>binwidth</code> unset? What happens if you try and zoom so only half a bar shows?</h4>
+<pre class="r"><code>ggplot(diamonds) +
+  geom_histogram(mapping = aes(x = price)) +
+  coord_cartesian(xlim = c(100, 5000), ylim = c(0, 3000))</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(diamonds) +
+  geom_histogram(mapping = aes(x = price)) +
+  xlim(100, 5000) +
+  ylim(0, 3000)</code></pre>
+<p><img src="Journal3_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p>The <code>coord_cartesian()</code> function zooms in on the area specified by the limits, after having calculated and drawn the geoms. Since the histogram bins have already been calculated, it is unaffected.</p>
+<p>However, the <code>xlim()</code> and <code>ylim()</code> functions influence actions before the calculation of the stats related to the histogram. Thus, any values outside the x- and y-limits are dropped before calculating bin widths and counts. This can influence how the histogram looks.</p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="exercises-1" class="section level3">
+<h3>7.4 Exercises</h3>
+<div id="what-happens-to-missing-values-in-a-histogram-what-happens-to-missing-values-in-a-bar-chart-why-is-there-a-difference" class="section level4">
+<h4>1. What happens to missing values in a histogram? What happens to missing values in a bar chart? Why is there a difference?</h4>
+<p>Missing values are removed when the number of observations in each bin are calculated and warning sign is generated.</p>
+<p><br> <br></p>
+</div>
+<div id="what-does-na.rm-true-do-in-mean-and-sum" class="section level4">
+<h4>2. What does <code>na.rm = TRUE</code> do in <code>mean()</code> and <code>sum()</code>?</h4>
+<p>This option removes <code>NA</code> values from the vector prior to calculating the mean and sum.</p>
+<p><br> <br></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
