@@ -47,7 +47,7 @@ If you look carefully, `my_variable` is different from `my_varıable`. Reading t
 
 #### 2. Tweak each of the following R commands so that they run correctly.
 
-The corrected code should look like this:
+The corrected code should look like this: 
 
 ```{r}
 library(tidyverse)

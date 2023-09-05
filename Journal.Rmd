@@ -62,7 +62,7 @@ There are `r nrow(mtcars)` rows and `r ncol(mtcars)` columns in `mtcars`.
 #### 3. What does the `drv` variable describe? Read the help for `?mpg` to
 find out.
 ```{r}
-# ?mpg
+# ?mpg 
 ```
 
 `drv` is the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd.

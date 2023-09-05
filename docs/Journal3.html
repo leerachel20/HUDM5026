@@ -351,7 +351,7 @@ div.tocify {
 </div>
 
 
-<p>Last compiled: 2021-10-07 22:47:54</p>
+<p>Last compiled: 2022-02-07 15:18:51</p>
 <p><br></p>
 <p><em>For Week 5: read WG chapters 6-8.</em></p>
 <p><br> <br></p>
@@ -416,7 +416,7 @@ summary(select(diamonds, x, y, z))</code></pre>
   geom_histogram(binwidth = 10, center = 0)</code></pre>
 <p><img src="Journal3_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>From our graph above, We see something is off. To get a close-up view, we restrict the <code>price</code> range:</p>
-<pre class="r"><code>ggplot(filter(diamonds, price &lt; 2000), aes(x = price)) +
+<pre class="r"><code>ggplot(filter(diamonds, price &lt; 2000), aes(x =price)) +
   geom_histogram(binwidth = 10, center = 0)</code></pre>
 <p><img src="Journal3_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>There are no diamonds with a price between $1,455 and $1,545.</p>

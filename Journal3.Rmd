@@ -69,7 +69,7 @@ ggplot(filter(diamonds, price < 10000), aes(x = price)) +
 
 From our graph above, We see something is off. To get a close-up view, we restrict the `price` range:
 ```{r}
-ggplot(filter(diamonds, price < 2000), aes(x = price)) +
+ggplot(filter(diamonds, price < 2000), aes(x =price)) +
   geom_histogram(binwidth = 10, center = 0)
 ```
 
